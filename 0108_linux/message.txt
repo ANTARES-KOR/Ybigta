@@ -1,0 +1,9 @@
+[2022-01-06 00:47:38,299] INFO [ThrottledChannelReaper-Fetch]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2022-01-06 00:47:38,300] INFO [ThrottledChannelReaper-Produce]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2022-01-06 00:47:38,301] INFO [ThrottledChannelReaper-Request]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2022-01-06 00:47:38,340] INFO Loading logs. (kafka.log.LogManager)
+[2022-01-06 00:47:38,349] INFO Logs loading complete in 9 ms. (kafka.log.LogManager)
+[2022-01-06 00:47:38,363] INFO Starting log cleanup with a period of 300000 ms. (kafka.log.LogManager)
+[2022-01-06 00:47:38,368] INFO Starting log flusher with a default period of 9223372036854775807 ms. (kafka.log.LogManager)
+[2022-01-06 00:47:38,754] ERROR [KafkaServer id=0] Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)
+
