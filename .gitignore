@@ -1,2 +1,6 @@
 .ipynb_checkpoints
 .DS_STORE
+.jpeg
+*.jpg
+*.zip
+*.twb
