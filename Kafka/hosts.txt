@@ -1,0 +1,7 @@
+172.31.43.225 peter-ansible01.foo.bar peter-ansible01
+172.31.47.88 peter-kafka01.foo.bar peter-kafka01
+172.31.35.219 peter-kafka02.foo.bar peter-kafka02
+172.31.41.108 peter-kafka03.foo.bar peter-kafka03
+172.31.44.211 peter-zk01.foo.bar peter-zk01
+172.31.40.85 peter-zk02.foo.bar peter-zk02
+172.31.34.167 peter-zk03.foo.bar peter-zk03
