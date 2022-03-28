@@ -1,0 +1,14 @@
+{
+  "name": "section6",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "ANTARES_SEO",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "redis": "^4.0.4"
+  }
+}

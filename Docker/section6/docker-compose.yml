@@ -1,0 +1,13 @@
+# docker compose version
+version: "3"
+# containers to run in this compose
+services:
+  redis-server:
+    # image to use for container
+    image: "redis"
+  node-app:
+    # Dockerfile directory
+    build: .
+    # port mapping
+    ports:
+      - "4000:8080"
