@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+  labels:
+    app: pod
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: k8s-node1
+  containers:
+    - name: container
+      image: tmkube/app
+      ports:
+        - containerPort: 8080

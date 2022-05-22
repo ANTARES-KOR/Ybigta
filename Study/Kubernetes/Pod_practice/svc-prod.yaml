@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-for-web
+spec:
+  selector:
+    lo: prod
+  ports:
+    - port: 8080

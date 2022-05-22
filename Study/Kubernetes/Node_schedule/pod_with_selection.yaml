@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-selection
+spec:
+  containers:
+    - name: container
+      image: tmkube/init
+  nodeSelector:
+    kubernetes.io/hostname: k8s-node1
