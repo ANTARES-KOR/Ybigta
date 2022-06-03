@@ -1,0 +1,21 @@
+# docker-compose version
+version: "3"
+
+# docker-compose로 서비스할 서비스들
+services:
+  # 서버 어플리케이션
+  server:
+    # 빌드 관련 정보
+    build:
+      # 폴더 위치
+      context: ./server
+      dockerfile: Dockerfile
+    # 어느 포트를 사용할지 설정
+    ports:
+      - "4000:4000"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
