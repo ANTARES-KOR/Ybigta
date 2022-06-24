@@ -60,6 +60,7 @@ def get_dataframe_from_playlist(playlist_link) :
   t_name = []
   t_pop = []
   track_uris = []
+  t_ids = []
 
   #Album features
   album_name = []
@@ -79,6 +80,7 @@ def get_dataframe_from_playlist(playlist_link) :
 
     # Track Info
 
+    t_ids.append(track["id"])
     track_uris.append(track["uri"])
     t_name.append(track["name"])
     t_pop.append(track["popularity"])
@@ -116,14 +118,12 @@ def get_dataframe_from_playlist(playlist_link) :
     duration.append(features["duration_ms"])
     time.append(features["time_signature"])
       
-      
-
   spotify_df = pd.DataFrame({'artist_name' : a_name, 'track_name' : t_name, 'album_name' : album_name,
                               'artist_genre' : a_genre, 'artist_popularity' : a_pop, 'track_popularity' : t_pop,
                               'artist_followers' : a_follower, 'danceability' : dance, 'energy' : energy,
                               'key' : key, 'loudness' : loudness, 'speechiness' : speech, 'acousticness' : acoustic,
                               'instrumentalness' : instrument, 'liveness' : live, 'valence' : valence, 'tempo' : tempo,
-                              'duration_ms' : duration, 'time_signature' : time, 'uri' : track_uris, 'release_date' : release_date, 'album_image' : album_image})
+                              'duration_ms' : duration, 'time_signature' : time, 'uri' : track_uris, 'release_date' : release_date, 'album_image' : album_image, 'id' : t_ids})
   
   return spotify_df
 
@@ -169,7 +169,7 @@ def save_playlists(playlist_links):
     df = get_dataframe_from_playlist(link)
     final_df = pd.concat([final_df, df])
   
-  final_df.drop(columns=['uri'], inplace=True)
+  final_df.drop_duplicates(subset=['uri'], inplace=True)
 
   save_dataframe_to_json(final_df, "dataset")
   

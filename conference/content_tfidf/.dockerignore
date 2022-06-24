@@ -1,0 +1,6 @@
+/data
+.gitignore
+*.json
+Dockerfile.dev
+*.ipynb
+.ipynb_checkpoints
