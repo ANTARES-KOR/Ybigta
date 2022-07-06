@@ -1,0 +1,10 @@
+version: "3"
+services:
+  frontend:
+    image: ybigta-conf-fe:2
+    ports:
+      - 3000:3000
+  backend:
+    image: ybigta-conf-be:2
+    ports:
+      - 8080:8080

@@ -1,15 +1,16 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import os
 import re
+import logging
+import argparse
 import pandas as pd
 import nltk
 nltk.download('stopwords')
+from nltk.corpus import stopwords
 import boto3
 import boto3.s3
-from nltk.corpus import stopwords
-from dotenv import load_dotenv
-import logging
 from botocore.exceptions import ClientError
+from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
@@ -69,7 +70,8 @@ class ContentTFIDF:
      
  
     def cleanText(self, text_data_in_list):
-        text = re.sub('[-=+#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','', str(text_data_in_list))
+        text_data = ','.join(text_data_in_list)
+        text = re.sub('[-=+#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]','', text_data)
         return text
 
     def preprocess(self):
@@ -94,21 +96,24 @@ class ContentTFIDF:
 
         return tfidf_dict, tfidf_content
 
-    def saveTFIDF(self, path = "./data"):
+    def saveTFIDF(self, tfidf_path = "./data/tfidf/tfidf_matrix"):
         tfidf_dict, tfidf_content = self.calculateTFIDF()
         tfidf_array = tfidf_content.toarray()
         tfidf_matrix = pd.DataFrame(tfidf_array, columns = tfidf_dict)
-        tfidf_file = 'tfidf_matrix.csv'
-        if path == None:
-            tfidf_path = tfidf_file
-        else:
-            tfidf_path = os.path.join(path, tfidf_file)
         tfidf_matrix.to_csv(tfidf_path, encoding = 'utf-8', index = False)
 
 if __name__ == "__main__":
-    download_file_from_s3("./data/dataset.json", "spotify-recomendation-dataset", "dataset.json")
-    data = pd.read_json('./data/dataset.json', encoding = 'utf-8', orient='records')
+    argument_parser = argparse.ArgumentParser()
+    argument_parser.add_argument(
+        '--data_path', type=str, default="./data/track/track_dataset.json"
+    )
+    argument_parser.add_argument(
+        '--tfidf_path', type=str, default="./data/tfidf/tfidf_matrix.csv" 
+    )
+    args = argument_parser.parse_args()
+    download_file_from_s3(args.data_path, "spotify-recomendation-dataset", "dataset.json")
+    data = pd.read_json(args.data_path, encoding = 'utf-8', orient='records')
     ctfidf = ContentTFIDF(data)
     ctfidf.preprocess()
     ctfidf.saveTFIDF()
-    upload_file_to_s3("./data/tfidf_matrix.csv", "spotify-tfidf", "tfidf_matrix.csv")
+    upload_file_to_s3(args.tfidf_path, "spotify-tfidf", "tfidf_matrix.csv")
